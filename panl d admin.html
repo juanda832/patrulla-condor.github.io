@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formulario de Administración - Patrulla Cóndor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f4f1ea;
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #3e4d2c;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 420px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px 0 rgba(36,36,36,0.10);
+      padding: 32px 24px 24px 24px;
+    }
+    h2 {
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #3e4d2c;
+      margin-top: 0;
+      text-align: center;
+    }
+    label {
+      font-size: 1em;
+      color: #3e4d2c;
+      font-weight: 500;
+      margin-bottom: 4px;
+      display: block;
+    }
+    input[type="text"], input[type="password"] {
+      font-size: 1em;
+      border-radius: 6px;
+      border: 1px solid #bfa76f;
+      padding: 8px 12px;
+      margin-bottom: 14px;
+      outline: none;
+      box-sizing: border-box;
+      width: 100%;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+    input:focus {
+      border: 1.5px solid #e9c46a;
+      box-shadow: 0 0 8px #e9c46a55;
+    }
+    button[type="submit"] {
+      background: #5e7d4a;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 0;
+      font-size: 1.1em;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 8px;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px #0001;
+    }
+    button[type="submit"]:hover {
+      background: #3e4d2c;
+    }
+    .error-msg {
+      color: #e53935;
+      font-size: 0.98em;
+      margin-top: 6px;
+      text-align: center;
+    }
+    .success-msg {
+      color: #4caf50;
+      font-size: 1em;
+      margin-top: 6px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Acceso Administrador</h2>
+    <form id="adminForm">
+      <label for="adminUser">Usuario:</label>
+      <input type="text" id="adminUser" required autocomplete="username">
+      <label for="adminPass">Contraseña:</label>
+      <input type="password" id="adminPass" required autocomplete="current-password">
+      <button type="submit">Entrar</button>
+      <div id="adminFormMsg"></div>
+    </form>
+  </div>
+  <script>
+    // Configura aquí tu usuario y contraseña de admin
+    const ADMIN_CRED = {
+      usuario: "admin",
+      contrasena: "condor2025"
+    };
+
+    document.getElementById("adminForm").onsubmit = function(e) {
+      e.preventDefault();
+      const user = document.getElementById("adminUser").value.trim();
+      const pass = document.getElementById("adminPass").value;
+      const msg = document.getElementById("adminFormMsg");
+      if (user === ADMIN_CRED.usuario && pass === ADMIN_CRED.contrasena) {
+        localStorage.setItem("adminLogueado", "true");
+        msg.textContent = "¡Acceso concedido! Redirigiendo...";
+        msg.className = "success-msg";
+        setTimeout(() => {
+          window.location.href = "patrulla condor .html";
+        }, 1200);
+      } else {
+        msg.textContent = "Usuario o contraseña incorrectos.";
+        msg.className = "error-msg";
+      }
+    };
+  </script>
+  <div style="text-align:center; margin-top:14px;">
+  <button onclick="logoutAdmin()" class="btn-restar">Cerrar sesión admin</button>
+</div>
+  <script>
+    function logoutAdmin() {
+      localStorage.removeItem("adminLogueado");
+      window.location.href = "patrulla condor .html";
+    }
+  </script>
+</body>
+</html>

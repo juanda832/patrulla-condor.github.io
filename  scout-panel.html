@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mi Panel Scout - Patrulla Cóndor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f4f1ea;
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #3e4d2c;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, #3e4d2c 60%, #5e7d4a 100%);
+      color: #fff;
+      padding: 32px 0 18px 0;
+      text-align: center;
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      position: relative;
+    }
+    .logo-condor {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 2px 6px #2222);
+    }
+    h1 {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 2.2rem;
+      margin: 0 0 8px 0;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px #0002;
+    }
+    .lema {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #e9c46a;
+      margin-bottom: 8px;
+    }
+    .panel-main {
+      max-width: 500px;
+      margin: 30px auto 0 auto;
+      padding: 0 20px 40px 20px;
+    }
+    .tarjeta {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px 0 rgba(36,36,36,0.10);
+      padding: 26px 22px 22px 22px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+    .tarjeta h2 {
+      margin-top: 0;
+      color: #3e4d2c;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .saldo-box {
+      background: #5e7d4a;
+      color: #fff;
+      border-radius: 10px;
+      padding: 18px 16px;
+      font-size: 1.3rem;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 8px #0001;
+    }
+    .coin {
+      font-size: 2rem;
+      margin-right: 8px;
+      filter: drop-shadow(0 2px 4px #0002);
+      color: #ffd700;
+    }
+    .perfil-img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #5e7d4a;
+      margin-bottom: 8px;
+      background: #fff;
+      box-shadow: 0 2px 8px #0001;
+    }
+    .perfil-nombre {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #3e4d2c;
+      margin-bottom: 4px;
+    }
+    .perfil-progreso {
+      font-size: 0.98rem;
+      color: #555;
+      margin-bottom: 8px;
+    }
+    .logros-lista {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .logro {
+      background: #e9c46a;
+      color: #fff;
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+      font-weight: bold;
+      box-shadow: 0 2px 8px #0001;
+      letter-spacing: 0.5px;
+    }
+    .historial-box {
+      background: #f4f1ea;
+      border-radius: 10px;
+      padding: 12px 10px;
+      margin-bottom: 18px;
+      font-size: 0.98rem;
+      max-height: 120px;
+      overflow-y: auto;
+      border: 1px solid #e9c46a;
+      box-shadow: 0 2px 8px #0001;
+    }
+    .historial-box ul {
+      padding-left: 18px;
+      margin: 0;
+      list-style: disc inside;
+    }
+    .logout-btn {
+      background: #e76f51;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 22px;
+      font-size: 1.1rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 18px;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px #0001;
+    }
+    .logout-btn:hover {
+      background: #b94d36;
+    }
+    @media (max-width: 600px) {
+      .panel-main {
+        padding: 0 4px 20px 4px;
+      }
+      .tarjeta {
+        padding: 10px 4px;
+        font-size: 0.98em;
+      }
+      .perfil-img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616494.png" alt="Cóndor Logo" class="logo-condor" />
+    <h1>Mi Panel Scout</h1>
+    <div class="lema">"¡Siempre Listos para Volar Alto!"</div>
+  </header>
+  <main class="panel-main">
+    <div class="tarjeta" id="panelPerfil">
+      <h2>Perfil Personal</h2>
+      <div style="text-align:center;">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="perfil-img" alt="Perfil Scout" id="perfilImg"/>
+        <div class="perfil-nombre" id="perfilNombre">Scout</div>
+        <div class="perfil-progreso">Progreso: <span id="perfilProgreso">0 cintas</span></div>
+        <div class="logros-lista" id="logrosLista"></div>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <h2>Saldo y Monedas</h2>
+      <div class="saldo-box">
+        <span class="coin">🪙</span>
+        <span>Saldo Ezequiel Coins: <b id="saldoUsuario">0</b></span>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <h2>Historial de Transacciones</h2>
+      <div class="historial-box">
+        <ul id="historialTransacciones"></ul>
+      </div>
+    </div>
+    <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+  </main>
+  <script>
+    // Cargar datos del usuario desde localStorage
+    let usuario = {
+      nombre: "Scout",
+      saldo: 0,
+      cintas: [],
+      historial: []
+    };
+    function cargarDatos() {
+      const u = localStorage.getItem('patrullaUsuario');
+      if (u) usuario = JSON.parse(u);
+    }
+    function mostrarPerfil() {
+      document.getElementById("perfilNombre").textContent = usuario.nombre;
+      document.getElementById("saldoUsuario").textContent = usuario.saldo;
+      document.getElementById("perfilProgreso").textContent = usuario.cintas.length + " cintas";
+      // Logros
+      const logros = document.getElementById("logrosLista");
+      logros.innerHTML = "";
+      usuario.cintas.forEach(cinta => {
+        const span = document.createElement("span");
+        span.className = "logro";
+        span.textContent = cinta;
+        logros.appendChild(span);
+      });
+      // Historial
+      const hist = document.getElementById("historialTransacciones");
+      hist.innerHTML = "";
+      if(usuario.historial && usuario.historial.length > 0){
+        usuario.historial.slice(-10).reverse().forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = `${item.tipo}${item.cantidad} 🪙 por ${item.motivo}`;
+          hist.appendChild(li);
+        });
+      } else {
+        const li == document.createElement("li");
+        li.textContent = "Sin transacciones aún.";
+        hist.appendChild(li);
+      }
+    }
+    function logout() {
+      localStorage.removeItem('patrullaUsuario');
+      window.location.href = "patrulla condor .html";
+    }
+    // Seguridad: si no hay usuario, redirige al inicio
+    cargarDatos();
+    if(!usuario || !usuario.nombre){
+      window.location.href = "patrulla condor .html";
+    } else {
+      mostrarPerfil();
+    }
+  </script>
+  <script>
+  // Cargar datos del usuario desde localStorage o pedir nombre si no existe
+  let usuario = {
+    nombre: "",
+    saldo: 0,
+    cintas: [],
+    historial: []
+  };
+
+  function pedirNombreScout() {
+    let nombre = "";
+    while (!nombre) {
+      nombre = prompt("Introduce tu nombre Scout para acceder a tu panel:");
+      if (nombre) {
+        usuario.nombre = nombre.trim();
+        usuario.saldo = 0;
+        usuario.cintas = [];
+        usuario.historial = [];
+        localStorage.setItem('patrullaUsuario', JSON.stringify(usuario));
+      }
+    }
+  }
+
+  function cargarDatos() {
+    const u = localStorage.getItem('patrullaUsuario');
+    if (u) {
+      usuario = JSON.parse(u);
+      if (!usuario.nombre) pedirNombreScout();
+    } else {
+      pedirNombreScout();
+    }
+  }
+
+  function mostrarPerfil() {
+    document.getElementById("perfilNombre").textContent = usuario.nombre;
+    document.getElementById("saldoUsuario").textContent = usuario.saldo;
+    document.getElementById("perfilProgreso").textContent = usuario.cintas.length + " cintas";
+    // Logros
+    const logros = document.getElementById("logrosLista");
+    logros.innerHTML = "";
+    usuario.cintas.forEach(cinta => {
+      const span = document.createElement("span");
+      span.className = "logro";
+      span.textContent = cinta;
+      logros.appendChild(span);
+    });
+    // Historial
+    const hist = document.getElementById("historialTransacciones");
+    hist.innerHTML = "";
+    if(usuario.historial && usuario.historial.length > 0){
+      usuario.historial.slice(-10).reverse().forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.tipo}${item.cantidad} 🪙 por ${item.motivo}`;
+        hist.appendChild(li);
+      });
+    } else {
+      const li = document.createElement("li");
+      li.textContent = "Sin transacciones aún.";
+      hist.appendChild(li);
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem('patrullaUsuario');
+    window.location.href = "patrulla condor .html";
+    <button class="logout-btn" onclick="cambiarCuenta()">Cambiar de Cuenta</button>
+  }
+  <script>
+  // ... (el resto de tu código permanece igual)
+
+  function cambiarCuenta() {
+    localStorage.removeItem('patrullaUsuario');
+    // Pide el nuevo nombre y recarga el perfil
+    pedirNombreScout();
+    mostrarPerfil();
+  }
+</script>
+
+  // Seguridad: si no hay usuario, pedir nombre
+  cargarDatos();
+  if (!usuario || !usuario.nombre) {
+    pedirNombreScout();
+  } else {
+    mostrarPerfil();
+  }
+  </script>
+</body>
+</html>
